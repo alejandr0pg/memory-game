@@ -23,7 +23,7 @@ const Marker = ({ name, success, errors, resetGame }: IProps) => {
         onClick={resetGame}
         className="bg-red-500 disabled:bg-gray-400 rounded-lg px-6 py-0.5"
       >
-        Reset Game
+        Reset
       </button>
     </section>
   );

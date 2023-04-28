@@ -14,10 +14,15 @@ import { useGameInfoStore } from "@/store/useGameInformation";
 
 export default function Play() {
   const { name } = useInfoUserStore((state: any) => state.userInfo);
-  const { success, errors } = useUserScoreStore((state: any) => state.score);
 
-  const { addPointSuccess, addPointError, resetPoints } = useUserScoreStore(
+  const {
+    score: { success, errors },
+    addPointSuccess,
+    addPointError,
+    resetPoints,
+  } = useUserScoreStore(
     (state: any) => ({
+      score: state.score,
       addPointSuccess: state.addPointSuccess,
       addPointError: state.addPointError,
       resetPoints: state.resetPoints,
@@ -41,20 +46,22 @@ export default function Play() {
   useEffect(() => {
     setMounted(true);
 
-    getCardTypeAnimals().then((animals) => {
-      const shuffledCards = shuffleArray([...animals, ...animals]).map(
-        (card: Card, index: number) => ({
-          ...card,
-          index,
-          show: false,
-        })
-      );
+    if (cards.length === 0) {
+      getCardTypeAnimals().then((animals) => {
+        const shuffledCards = shuffleArray([...animals, ...animals]).map(
+          (card: Card, index: number) => ({
+            ...card,
+            index,
+            show: false,
+          })
+        );
 
-      setCards(shuffledCards);
-    });
+        setCards(shuffledCards);
+      });
+    }
 
     return () => setMounted(false);
-  }, [setCards]);
+  }, [cards.length, setCards]);
 
   const onClick = (card: PlayerCard) => {
     const cardShowed = { ...card, show: true };
@@ -103,10 +110,7 @@ export default function Play() {
     const { force } = props || {};
 
     if (animating && !force) {
-      alert(
-        "No puedes reiniciar el juego mientras se están mostrando las cartas"
-      );
-
+      alert("You cannot restart the game while the cards are being displayed");
       return;
     }
 

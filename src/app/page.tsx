@@ -6,23 +6,26 @@ import Image from "next/image";
 import { useInfoUserStore } from "@/store/userInformation";
 import { useState } from "react";
 import { useUserScoreStore } from "@/store/userScore";
+import { useGameInfoStore } from "@/store/useGameInformation";
+import { UserInformation } from "@/models/User.model";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
   const [name, setName] = useState("");
   const router = useRouter();
-  const updateUserInfo = useInfoUserStore(
-    (state: any) => state?.updateUserInfo
-  );
-  const resetPoints = useUserScoreStore((state: any) => state?.resetPoints);
+  const updateUserInfo = useInfoUserStore((state) => state.updateUserInfo);
+  const resetPoints = useUserScoreStore((state) => state.resetPoints);
+  const resetCards = useGameInfoStore((state) => state.resetCards);
 
   const playGame = () => {
     if (!name) return alert("Ingresa tu nombre de usuario");
-
-    updateUserInfo({ name });
+    // Reset all the game
     resetPoints();
-
+    resetCards();
+    // Update the user information
+    updateUserInfo({ name } as UserInformation);
+    // Redirect to the game
     router.push("/play");
   };
 
