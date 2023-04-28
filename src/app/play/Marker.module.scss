@@ -1,3 +1,5 @@
+@use "./../../sass/media-queries.scss" as *;
+
 .marker {
   background: #dedede;
   margin: 0 auto 1em;
@@ -7,4 +9,16 @@
   border-radius: 6px;
   box-shadow: 2px 2px 5px;
   font: 600 1.25em/1.5 klee one, comic sans ms, purisa, cursive;
+
+  @include xs {
+    width: calc(100% - 30px);
+    display: block !important;
+    font-size: 16px;
+  }
+
+  @include sm {
+    width: calc(100% - 30px);
+    display: block !important;
+    font-size: 16px;
+  }
 }

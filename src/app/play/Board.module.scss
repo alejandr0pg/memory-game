@@ -1,6 +1,8 @@
+@use "./../../sass/media-queries.scss" as *;
+
 .board {
   display: grid;
-  grid-template-columns: repeat(8, 2fr);
+  grid-template-columns: repeat(5, 2fr);
   grid-gap: 20px;
   padding: 20px;
   margin: auto;
@@ -9,4 +11,16 @@
   border: 2px solid #dedede;
   background: #dedede;
   margin-bottom: 20px;
+
+  @include xs {
+    grid-template-columns: repeat(2, 2fr);
+  }
+
+  @include sm {
+    grid-template-columns: repeat(4, 2fr);
+  }
+
+  @include md {
+    grid-template-columns: repeat(5, 2fr);
+  }
 }
