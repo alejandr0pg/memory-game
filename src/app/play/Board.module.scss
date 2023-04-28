@@ -1,0 +1,12 @@
+.board {
+  display: grid;
+  grid-template-columns: repeat(8, 2fr);
+  grid-gap: 20px;
+  padding: 20px;
+  margin: auto;
+  height: 100%;
+  border-radius: 20px;
+  border: 2px solid #dedede;
+  background: #dedede;
+  margin-bottom: 20px;
+}
