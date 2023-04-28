@@ -1,3 +1,4 @@
+import { shuffleArray } from "@/helpers/shuffle.helper";
 import { PlayerCard } from "@/models/PlayerCard.model";
 import { create } from "zustand";
 import { devtools, persist } from "zustand/middleware";
@@ -17,8 +18,9 @@ export const useGameInfoStore = create<GameState>()(
     setCards: (cards: PlayerCard[]) => set(() => ({ cards: cards })),
     resetCards: () =>
       set((state: GameState) => ({
-        cards: state.cards.map((card: PlayerCard) => ({
+        cards: shuffleArray(state.cards).map((card: PlayerCard, index) => ({
           ...card,
+          index,
           show: false,
         })),
       })),

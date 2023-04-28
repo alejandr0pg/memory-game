@@ -112,6 +112,7 @@ export default function Play() {
 
     resetPoints();
     resetCards();
+    setCardSelected(null);
   };
 
   return (
